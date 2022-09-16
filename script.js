@@ -23,6 +23,7 @@ function modalClose() {
 const expenseName = document.querySelector('.expense')
 const expenseDate = document.querySelector('.date')
 const expenseCategory = document.querySelector('.category')
+const expenseAmount = document.querySelector('.spend')
 
 //Handle Submit
 const submitButton = document.querySelector('.submit')
@@ -36,11 +37,12 @@ const infoArray = []
 let numOfItems = 0;
 
 class Information {
-  constructor(Id, Name, eDate, Category) {
+  constructor(Id, Name, eDate, Category, Spend) {
     this._Id = Id
     this._Name = Name,
     this._Date = eDate,
     this._Category = Category
+    this._Spend = Spend
   }
 
   get Id() {
@@ -59,6 +61,10 @@ class Information {
     return this.Category;
   }
 
+  get Spend() {
+    return this.Spend
+  }
+
 }
 
 submitButton.addEventListener('click', handleSubmit)
@@ -67,7 +73,7 @@ function handleSubmit(e) {
   e.preventDefault();
   const tempArray = []
 
-  const newestItem = new Information(numOfItems, expenseName.value, expenseDate.value, expenseCategory.value)
+  const newestItem = new Information(numOfItems, expenseName.value, expenseDate.value, expenseCategory.value, expenseAmount.value)
   numOfItems++
 
   infoArray.push(newestItem)
@@ -100,6 +106,11 @@ function handleSubmit(e) {
     column3.classList.add('table-col');
     column3.innerHTML = tempArray[0]._Category
     newTableRow.append(column3)
+
+    const column4 = document.createElement('div')
+    column4.classList.add('table-col');
+    column4.innerHTML = '$' + tempArray[0]._Spend
+    newTableRow.append(column4)
 
 
 
